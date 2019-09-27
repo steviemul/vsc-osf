@@ -1,0 +1,68 @@
+{
+	"name": "vsc-osf",
+	"displayName": "vsc-osf",
+	"description": "OCC OSF VS Code extension",
+	"version": "0.0.1",
+	"publisher": "steviemul",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "occ.osf.createInstance",
+				"title": "Create Component Instance Definition"
+			},
+			{
+				"command":"occ.osf.createPage",
+				"title": "Create Page Instance Definition"
+			}
+		],
+		"jsonValidation": [
+			{
+				"fileMatch": "**/pages/*.json",
+				"url": "./json/pageSchema.json"
+			},
+			{
+				"fileMatch": "**/assets/components/*/index.json",
+				"url": "./json/componentSchema.json"
+			},
+			{
+				"fileMatch": "**/assets/components/*/layout.json",
+				"url": "./json/layoutSchema.json"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/mocha": "^2.2.42",
+		"@types/node": "^10.12.21",
+		"tslint": "^5.12.1",
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28"
+	},
+	"dependencies": {
+		"@babel/parser": "^7.4.5",
+		"@babel/types": "^7.4.4",
+		"@types/fs-extra": "^8.0.0",
+		"@types/glob": "^7.1.1",
+		"axios": "^0.18.0",
+		"babel-core": "^6.26.3",
+		"fs-extra": "^8.1.0",
+		"glob": "^7.1.4"
+	}
+}

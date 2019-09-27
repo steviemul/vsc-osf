@@ -1,0 +1,56 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "regions"
+  ],
+  "properties": {
+    "regions": {
+      "$id": "#/properties/regions",
+      "type": "array",
+      "title": "The Regions Schema",
+      "items": {
+        "$id": "#/properties/regions/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "width",
+          "components"
+        ],
+        "properties": {
+          "width": {
+            "$id": "#/properties/regions/items/properties/width",
+            "type": "integer",
+            "title": "The Width Schema",
+            "default": 12,
+            "minimum": 1,
+            "maxItems": 12,
+            "examples": [
+              12
+            ]
+          },
+          "components": {
+            "$id": "#/properties/regions/items/properties/components",
+            "type": "array",
+            "title": "The Components Schema",
+            "items": {
+              "$id": "#/properties/regions/items/properties/components/items",
+              "type": "string",
+              "title": "The Items Schema",
+              "default": "",
+              "examples": [
+                "ProductTitle",
+                "ProductImage",
+                "ProductPrice"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
+        }
+      }
+    }
+  }
+}
