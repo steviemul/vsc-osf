@@ -1,0 +1,102 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "title",
+    "address",
+    "shortName",
+    "layout"
+  ],
+  "properties": {
+    "title": {
+      "$id": "#/properties/title",
+      "type": "string",
+      "title": "The Title Schema",
+      "default": "",
+      "examples": [
+        "Homepage"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "address": {
+      "$id": "#/properties/address",
+      "type": "string",
+      "title": "The Address Schema",
+      "default": "",
+      "examples": [
+        "/home"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "shortName": {
+      "$id": "#/properties/shortName",
+      "type": "string",
+      "title": "The Shortname Schema",
+      "default": "",
+      "examples": [
+        "home"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "secure": {
+      "$id": "#/properties/secure",
+      "type": "boolean",
+      "title": "The Secure Schema",
+      "default": false
+    },
+    "layout": {
+      "$id": "#/properties/layout",
+      "type": "array",
+      "title": "The Layout Schema",
+      "items": {
+        "$id": "#/properties/layout/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "type",
+          "width",
+          "components"
+        ],
+        "properties": {
+          "type": {
+            "$id": "#/properties/layout/items/properties/type",
+            "type": "string",
+            "title": "The Type Schema",
+            "default": "",
+            "enum": ["header", "main", "footer"],
+            "examples": [
+              "header"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "width": {
+            "$id": "#/properties/layout/items/properties/width",
+            "type": "integer",
+            "title": "The Width Schema",
+            "default": 12,
+            "minimum": 1,
+            "maximum": 12
+          },
+          "components": {
+            "$id": "#/properties/layout/items/properties/components",
+            "type": "array",
+            "title": "The Components Schema",
+            "items": {
+              "$id": "#/properties/layout/items/properties/components/items",
+              "type": "string",
+              "title": "The Items Schema",
+              "default": "",
+              "examples": [
+                "MenuMobile"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

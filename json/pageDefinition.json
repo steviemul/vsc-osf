@@ -1,0 +1,23 @@
+{
+  "title": "title",
+  "address": "address",
+  "shortName": "shortName",
+  "secure": false,
+  "layout": [
+    {
+      "type": "header",
+      "width": 12,
+      "components": []
+    },
+    {
+      "type": "main",
+      "width": 12,
+      "components": []
+    },
+    {
+      "type": "footer",
+      "width": 12,
+      "components": []
+    }
+  ]
+}
