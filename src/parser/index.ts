@@ -4,6 +4,12 @@ const COLON = ':';
 const QUOTE = '"';
 const MAX_DISTANCE  = 200;
 
+/**
+ * Method searches back through a json document for the nearest property definition.
+ * 
+ * @param document the document to examine.
+ * @param startPosition the line number to start searching at.
+ */
 const getNearestProperty = (document: vscode.TextDocument, startPosition: number) => {
 
   let distance: number = 0;

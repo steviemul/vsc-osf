@@ -39,7 +39,32 @@
 				"fileMatch": "**/assets/components/*/layout.json",
 				"url": "./json/layoutSchema.json"
 			}
-		]
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "occ-osf-app-explorer",
+					"title": "Oracle Commerce Cloud",
+					"icon": "images/design48x48.png"
+				}
+			]
+		},
+		"views": {
+			"occ-osf-app-explorer": [
+				{
+					"id": "occ.osf.apps",
+					"name": "Applications"
+				},
+				{
+					"id": "occ.osf.layouts",
+					"name": "Pages"
+				},
+				{
+					"id": "occ.osf.components",
+					"name": "Components"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",

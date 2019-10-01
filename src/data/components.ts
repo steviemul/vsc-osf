@@ -7,7 +7,7 @@ const PACKAGES = 'packages';
 const OCC = '.occ';
 const APP_JSON = 'app.json';
 
-const getCompoentInstances = (appJsonLocation: string) => {
+const getComponentInstances = (appJsonLocation: string) => {
 
   const appPath = path.resolve(appJsonLocation, '..', '..');
   const instanceLocation = path.join(appPath, 'assets', 'components');
@@ -44,7 +44,7 @@ const getComponentsForContainingApp = (fileLocation: string, includeInstances: b
       const appJson = readJson(appJsonLocation);
 
       if (includeInstances) {
-        const instances = getCompoentInstances(appJsonLocation);
+        const instances = getComponentInstances(appJsonLocation);
 
         for (let instance of instances) {
           appJson.components[instance] = {};
