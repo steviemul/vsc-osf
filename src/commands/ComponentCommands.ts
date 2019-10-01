@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { getComponentsForContainingApp, getAppRoot } from '../data';
+import { getComponentsForContainingApp, getAppRoot, getTargetAssetLocation } from '../data';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
@@ -7,11 +7,13 @@ const outputMetaFile = (filename: string, contents: Object) => {
   fs.writeFileSync(filename, JSON.stringify(contents, null, 2), 'utf8');
 };
 
-async function createComponentInstance(fileLocation: string) {
+async function createComponentInstance() {
 
+  const fileLocation = await getTargetAssetLocation();
   const appJson = getComponentsForContainingApp(fileLocation);
 
   if (appJson) {
+
     const type = await vscode.window.showQuickPick(
       Object.keys(appJson.components), {
       placeHolder: 'Select component type'
@@ -94,15 +96,7 @@ export default class ComponentCommands {
   register() {
 
     const createSubscription = vscode.commands.registerCommand('occ.osf.createInstance', () => {
-      const activeEditor = vscode.window.activeTextEditor;
-
-      if (activeEditor) {
-        const activeDoc = activeEditor.document;
-
-        if (activeDoc) {
-          createComponentInstance(activeDoc.fileName);
-        }
-      }
+      createComponentInstance();
     });
 
     this.context.subscriptions.push(createSubscription);

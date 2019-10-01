@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { getAppRoot } from '../data';
+import { getAppRoot, getTargetAssetLocation } from '../data';
+import {readJson} from '../utils';
 
 const titleCase = (str: string) => {
 
@@ -17,22 +18,16 @@ const titleCase = (str: string) => {
 
 }
 
-const readJson = (location: string) => {
-  if (fs.existsSync(location)) {
-    const json: string = fs.readFileSync(location, 'utf8');
-
-    return JSON.parse(json);
-  }
-};
-
-async function createPageDefinition (fileLocation: string, extensionRoot: string) {
+async function createPageDefinition (extensionRoot: string) {
   
+  const targetLocation = await getTargetAssetLocation();
+
   const name = await vscode.window.showInputBox({
     prompt: 'Page Name'
   });
 
-  if (name) {
-    const appRoot = getAppRoot(fileLocation);
+  if (name && targetLocation) {
+    const appRoot = getAppRoot(targetLocation);
 
     const pageDesination = path.join(appRoot || '', 'assets', 'pages');
 
@@ -70,15 +65,7 @@ export default class PageCommands {
   register() {
 
     const createSubscription = vscode.commands.registerCommand('occ.osf.createPage', () => {
-      const activeEditor = vscode.window.activeTextEditor;
-
-      if (activeEditor) {
-        const activeDoc = activeEditor.document;
-
-        if (activeDoc) {
-          createPageDefinition(activeDoc.fileName, this.context.extensionPath);
-        }
-      }
+      createPageDefinition(this.context.extensionPath);
     });
 
     this.context.subscriptions.push(createSubscription);

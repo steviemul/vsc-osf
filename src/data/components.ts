@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import {readJson} from '../utils';
 
 const APPS = 'apps';
 const PACKAGES = 'packages';
@@ -16,14 +17,6 @@ const getCompoentInstances = (appJsonLocation: string) => {
   }
 
   return [];
-};
-
-const readJson = (location: string) => {
-  if (fs.existsSync(location)) {
-    const json: string = fs.readFileSync(location, 'utf8');
-
-    return JSON.parse(json);
-  }
 };
 
 const getAppRoot = (fileLocation: string) => {

@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import ComponentCompletion from './language/ComponentCompletion';
 import ComponentCommands from './commands/ComponentCommands';
 import PageCommands from './commands/PageCommands';
+import {setApplicationInformationFromFiles} from './data/applications'
 import * as glob from 'glob';
 
 const APP_JSON_PATTERN = '**/app.json';
@@ -26,6 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
 		dot: true
 	}, (err, files) => {
 		if (files && files.length > 0) {
+			setApplicationInformationFromFiles(workspaceRoot, files);
 			componentCompletion.activate();
 		}
 	});	
