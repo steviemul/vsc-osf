@@ -2,9 +2,27 @@ import * as vscode from 'vscode';
 import { getComponentsForContainingApp, getAppRoot, getTargetAssetLocation } from '../data';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { ApplicationProvider } from '../providers/ApplicationProvider';
 
 const outputMetaFile = (filename: string, contents: Object) => {
   fs.writeFileSync(filename, JSON.stringify(contents, null, 2), 'utf8');
+};
+
+const generateConfig = (component: any): any | undefined => {
+
+  if (component.config) {
+    if (component.config.properties) {
+      const config: any = {};
+
+      component.config.properties.forEach((property: any) => {
+        config[property.id] = property.defaultValue || ''
+      });
+
+      return config;
+    }
+  }
+
+  return { 'sampleConfig': 'sampleConfigValue1' };
 };
 
 async function createComponentInstance() {
@@ -71,7 +89,7 @@ async function createComponentInstance() {
             outputMetaFile(resourcesMetaLocation, resources);
 
             const configMetaLocation = path.join(instanceLocation, 'config.json');
-            const config = { 'sampleConfig': 'sampleConfigValue1' };
+            const config = generateConfig(typeDefinition);
 
             outputMetaFile(configMetaLocation, config);
 
@@ -81,24 +99,32 @@ async function createComponentInstance() {
       }
     }
   }
-  
-
 }
 
 export default class ComponentCommands {
 
   context: vscode.ExtensionContext;
+  dataProvider: ApplicationProvider;
 
-  constructor(context: vscode.ExtensionContext) {
+  constructor(context: vscode.ExtensionContext, dataProvider: ApplicationProvider) {
     this.context = context;
+    this.dataProvider = dataProvider;
   }
 
   register() {
 
     const createSubscription = vscode.commands.registerCommand('occ.osf.createInstance', () => {
-      createComponentInstance();
+      createComponentInstance().then(() => {
+        this.dataProvider.refresh();      
+      });
+    });
+
+    const deleteSubscription = vscode.commands.registerCommand('occ.osf.deleteInstance', (item: any) => {
+      fs.removeSync(item.root);
+      this.dataProvider.refresh();
     });
 
     this.context.subscriptions.push(createSubscription);
+    this.context.subscriptions.push(deleteSubscription);
   }
 }

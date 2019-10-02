@@ -12,11 +12,11 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const applicationProvider = new ApplicationProvider(context);
 
-	const componentCommands = new ComponentCommands(context);
+	const componentCommands = new ComponentCommands(context, applicationProvider);
 
 	componentCommands.register();
 
-	const pageCommands = new PageCommands(context);
+	const pageCommands = new PageCommands(context, applicationProvider);
 
 	pageCommands.register();
 	

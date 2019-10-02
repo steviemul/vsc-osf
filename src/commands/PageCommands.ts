@@ -3,6 +3,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { getAppRoot, getTargetAssetLocation } from '../data';
 import {readJson} from '../utils';
+import { ApplicationProvider } from '../providers/ApplicationProvider';
 
 const titleCase = (str: string) => {
 
@@ -57,17 +58,27 @@ async function createPageDefinition (extensionRoot: string) {
 export default class PageCommands {
 
   context: vscode.ExtensionContext;
+  dataProvider: ApplicationProvider;
 
-  constructor(context: vscode.ExtensionContext) {
+  constructor(context: vscode.ExtensionContext, dataProvider: ApplicationProvider) {
     this.context = context;
+    this.dataProvider = dataProvider;
   }
 
   register() {
 
     const createSubscription = vscode.commands.registerCommand('occ.osf.createPage', () => {
-      createPageDefinition(this.context.extensionPath);
+      createPageDefinition(this.context.extensionPath).then(() => {
+        this.dataProvider.refresh();
+      });
+    });
+
+    const deleteSubscription = vscode.commands.registerCommand('occ.osf.deletePage', (page) => {
+      fs.removeSync(page.root);
+      this.dataProvider.refresh();
     });
 
     this.context.subscriptions.push(createSubscription);
+    this.context.subscriptions.push(deleteSubscription);
   }
 }

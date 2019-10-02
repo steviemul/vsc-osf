@@ -7,9 +7,13 @@ export class PageProvider implements vscode.TreeDataProvider<Page> {
   readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
 
   pages: Page[];
-
+  
   constructor(private context: vscode.ExtensionContext) {
     this.pages = new Array();
+
+    this.openPage = this.openPage.bind(this);
+
+    this.registerCommands();
   }
 
   public setData(pages: Page[]) {
@@ -24,5 +28,15 @@ export class PageProvider implements vscode.TreeDataProvider<Page> {
 
   getTreeItem(page: Page): vscode.TreeItem {
     return page;
+  }
+
+  private openPage(location: string) {
+    vscode.window.showTextDocument(vscode.Uri.file(location))
+  }
+
+  private registerCommands() {
+    const subscription = vscode.commands.registerCommand('occ.osf.openPage', this.openPage);
+
+    this.context.subscriptions.push(subscription);
   }
 }

@@ -1,7 +1,9 @@
 import * as vscode from 'vscode';
 import Component from './Component';
+import InstanceData from './InstanceData';
+import * as fs from 'fs';
 
-export class ComponentProvider implements vscode.TreeDataProvider<Component> {
+export class ComponentProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
   private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
   readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
@@ -10,6 +12,10 @@ export class ComponentProvider implements vscode.TreeDataProvider<Component> {
 
   constructor(private context: vscode.ExtensionContext) {
     this.components = new Array();
+
+    this.showInstanceData = this.showInstanceData.bind(this);
+
+    this.registerCommands();
   }
 
   public setData(components: Component[]) {
@@ -18,11 +24,55 @@ export class ComponentProvider implements vscode.TreeDataProvider<Component> {
     this._onDidChangeTreeData.fire();
   }
 
-  public async getChildren(component?: Component): Promise<Component[]> {
-    return this.components;
+  public async getChildren(item?: Component): Promise<vscode.TreeItem[]> {
+
+    if (item === undefined) {
+      return this.components;
+    }
+
+    if (item.instances) {
+      return item.instances;
+    }
+
+    if (item.type === 'instance') {
+      return this.getInstanceChildren(item);
+    }
+
+    return [];
+  }
+
+  private getInstanceChildren(item: any) :InstanceData[] {
+
+    const instanceData: InstanceData[] = [];
+
+    instanceData.push(
+      new InstanceData('config', 'config', item.root),
+      new InstanceData('resources', 'resources', item.root)
+    );
+    
+    if (item.container) {
+      instanceData.push(new InstanceData('layout', 'layout', item.root));
+    }
+    return instanceData;
   }
 
   getTreeItem(component: Component): vscode.TreeItem {
     return component;
+  }
+
+  private showInstanceData(location: string) {
+    if (!fs.existsSync(location)) {
+      const data = {};
+
+      fs.writeFileSync(location, JSON.stringify(data, null, 2), 'utf8');
+    }
+
+    vscode.window.showTextDocument(vscode.Uri.file(location));
+  }
+
+  private registerCommands() {
+    const subscription = vscode.commands.registerCommand('occ.osf.showInstanceData', this.showInstanceData);
+
+    this.context.subscriptions.push(subscription);
   }
 }

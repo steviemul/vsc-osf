@@ -28,6 +28,30 @@
 			{
 				"command":"occ.osf.selectApplication",
 				"title": "Show application assets"
+			},
+			{
+				"command": "occ.osf.openPage",
+				"title": "Open page definition"
+			},
+			{
+				"command": "occ.osf.showInstanceData",
+				"title": "Show instance data"
+			},
+			{
+				"command": "occ.osf.deletePage",
+				"title": "Delete Page",
+				"icon": {
+					"light": "images/trash48x48.png",
+					"dark": "images/trash48x48.png"
+				}
+			},
+			{
+				"command": "occ.osf.deleteInstance",
+				"title": "Delete Instance",
+				"icon": {
+					"light": "images/trash48x48.png",
+					"dark": "images/trash48x48.png"
+				}
 			}
 		],
 		"jsonValidation": [
@@ -66,6 +90,20 @@
 				{
 					"id": "occ.osf.components",
 					"name": "Components"
+				}
+			]
+		},
+		"menus": {
+			"view/item/context": [
+				{
+					"command":"occ.osf.deletePage",
+					"when": "view == occ.osf.pages && viewItem == page",
+					"group":"inline"
+				},
+				{
+					"command": "occ.osf.deleteInstance",
+					"when": "view == occ.osf.components && viewItem == instance",
+					"group": "inline"
 				}
 			]
 		}
