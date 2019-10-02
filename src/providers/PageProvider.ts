@@ -6,7 +6,7 @@ export class PageProvider implements vscode.TreeDataProvider<Page> {
   private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
   readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
 
-  pages: Page[]
+  pages: Page[];
 
   constructor(private context: vscode.ExtensionContext) {
     this.pages = new Array();
@@ -19,10 +19,7 @@ export class PageProvider implements vscode.TreeDataProvider<Page> {
   }
 
   public async getChildren(page?: Page): Promise<Page[]> {
-
-    let pages: Page[] = [];
-
-    return pages;
+    return this.pages;
   }
 
   getTreeItem(page: Page): vscode.TreeItem {

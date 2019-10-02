@@ -36,7 +36,8 @@ export function activate(context: vscode.ExtensionContext) {
 			applicationProvider.setData(APPS);
 			
 			vscode.window.registerTreeDataProvider('occ.osf.apps', applicationProvider);
-			vscode.window.registerTreeDataProvider('occ.osf.components', applicationProvider.getComponentProvider())
+			vscode.window.registerTreeDataProvider('occ.osf.pages', applicationProvider.pageProvider);
+			vscode.window.registerTreeDataProvider('occ.osf.components', applicationProvider.componentProvider);
 		}
 	});	
 

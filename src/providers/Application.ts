@@ -5,18 +5,24 @@ export default class Application extends vscode.TreeItem {
 
   type: string;
   root: string;
-  metadata: object;
+  metadata: any;
 
   constructor(
     type: string, label: string,
     root: string, metadata: object, 
-    collapsibleState: vscode.TreeItemCollapsibleState, command?: vscode.Command
+    collapsibleState: vscode.TreeItemCollapsibleState
   ) {
     super(label, collapsibleState);
     this.type = type;
     this.root = root;
     this.metadata = metadata;
-    this.command = command;
+
+    this.command = {
+      command: 'occ.osf.selectApplication',
+      arguments: [this],
+      title: 'Select Application'
+    };
+
     this.iconPath = path.join(__filename, '..', '..', '..', 'images/cubes.png');
   }
 

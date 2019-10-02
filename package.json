@@ -24,6 +24,10 @@
 			{
 				"command":"occ.osf.createPage",
 				"title": "Create Page Instance Definition"
+			},
+			{
+				"command":"occ.osf.selectApplication",
+				"title": "Show application assets"
 			}
 		],
 		"jsonValidation": [
@@ -56,7 +60,7 @@
 					"name": "Applications"
 				},
 				{
-					"id": "occ.osf.layouts",
+					"id": "occ.osf.pages",
 					"name": "Pages"
 				},
 				{
