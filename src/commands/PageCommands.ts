@@ -78,7 +78,14 @@ export default class PageCommands {
       this.dataProvider.refresh();
     });
 
+    const previewSubscription = vscode.commands.registerCommand('occ.osf.previewLayout', (page) => {
+      const url = `http://localhost/${page.metadata.shortName}`;
+
+      vscode.env.openExternal(vscode.Uri.parse(url));
+    });
+
     this.context.subscriptions.push(createSubscription);
     this.context.subscriptions.push(deleteSubscription);
+    this.context.subscriptions.push(previewSubscription);
   }
 }

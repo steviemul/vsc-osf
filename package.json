@@ -52,6 +52,14 @@
 					"light": "images/trash48x48.png",
 					"dark": "images/trash48x48.png"
 				}
+			},
+			{
+				"command": "occ.osf.previewLayout",
+				"title": "Open Page",
+				"icon" : {
+					"light": "images/search48x48.png",
+					"dark": "images/search48x48.png"
+				}
 			}
 		],
 		"jsonValidation": [
@@ -99,6 +107,11 @@
 					"command":"occ.osf.deletePage",
 					"when": "view == occ.osf.pages && viewItem == page",
 					"group":"inline"
+				},
+				{
+					"command":"occ.osf.previewLayout",
+					"when": "view == occ.osf.pages && viewItem == page",
+					"group": "inline"
 				},
 				{
 					"command": "occ.osf.deleteInstance",
