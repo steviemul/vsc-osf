@@ -47,6 +47,27 @@
       "title": "The Secure Schema",
       "default": false
     },
+    "defaultPage": {
+      "$id": "#/properties/defaultPage",
+      "type": "boolean",
+      "title": "The defaultPage Schema",
+      "default": false
+    },
+    "supportedDevices": {
+      "$id": "#/properties/supportedDevices",
+      "type": "array",
+      "title": "The supportedDevice Schema",
+      "items": {
+        "$id": "#/properties/supportedDevices/items/properties/supportedDevices/items",
+        "type": "string",
+        "title": "The Items Schema",
+        "enum": ["mobile", "desktop"],
+        "default": "",
+        "examples": [
+          "mobile"
+        ]
+      }
+    },
     "layout": {
       "$id": "#/properties/layout",
       "type": "array",
