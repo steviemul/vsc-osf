@@ -4,7 +4,7 @@ import ComponentCompletion from './language/ComponentCompletion';
 import ComponentCommands from './commands/ComponentCommands';
 import PageCommands from './commands/PageCommands';
 import {ApplicationProvider} from './providers/ApplicationProvider';
-import {setApplicationInformationFromFiles, APPS} from './data/applications'
+import {setApplicationInformationFromFiles, APPS} from './data/applications';
 
 const APP_JSON_PATTERN = '**/app.json';
 
@@ -38,6 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.registerTreeDataProvider('occ.osf.apps', applicationProvider);
 			vscode.window.registerTreeDataProvider('occ.osf.pages', applicationProvider.pageProvider);
 			vscode.window.registerTreeDataProvider('occ.osf.components', applicationProvider.componentProvider);
+			vscode.window.registerTreeDataProvider('occ.osf.components.instances', applicationProvider.componentInstanceProvider);
 		}
 	});	
 

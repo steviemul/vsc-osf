@@ -4,15 +4,15 @@ import * as path from 'path';
 export default class ComponentInstance extends vscode.TreeItem {
 
   type: string;
-  root: String;
-  componentType: String;
+  root: string;
+  componentType: string;
   container: boolean = false;
 
   constructor(
     type: string,
     label: string,
     root: string,
-    componentType: String,
+    componentType: string,
     collapsibleState: vscode.TreeItemCollapsibleState
   ) {
     super(label, collapsibleState);

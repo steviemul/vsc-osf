@@ -54,6 +54,14 @@
 				}
 			},
 			{
+				"command": "occ.osf.renameInstance",
+				"title": "Rename Instance",
+				"icon": {
+						"light": "images/pencil32x32.png",
+						"dark": "images/pencil32x32.png"
+				}
+			},
+			{
 				"command": "occ.osf.previewLayout",
 				"title": "Open Page",
 				"icon" : {
@@ -98,6 +106,10 @@
 				{
 					"id": "occ.osf.components",
 					"name": "Components"
+				},
+				{
+					"id": "occ.osf.components.instances",
+					"name": "Component Instances"
 				}
 			]
 		},
@@ -117,6 +129,11 @@
 					"command": "occ.osf.deleteInstance",
 					"when": "view == occ.osf.components && viewItem == instance",
 					"group": "inline"
+				},
+				{
+						"command": "occ.osf.renameInstance",
+						"when": "viewItem == instance",
+						"group": "inline"
 				}
 			]
 		}

@@ -2,14 +2,14 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 
 interface IconDefinition {
-  [config: string]: string,
-  resources: string,
-  layout: string
+  [config: string]: string;
+  resources: string;
+  layout: string;
 }
 
 const ICONS: IconDefinition = {
   'config': 'cog48x48.png',
-  'resources': 'pencil32x32.png',
+  'resources': 'font32x32.png',
   'layout': 'th.png'
 };
 

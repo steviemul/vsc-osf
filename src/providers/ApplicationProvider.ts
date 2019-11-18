@@ -8,6 +8,7 @@ import {PageProvider} from './PageProvider';
 import Page from './Page';
 import { readJson } from '../utils';
 import ComponentInstance from './ComponentInstance';
+import { ComponentInstanceProvider } from './ComponentInstanceProvider';
 
 export class ApplicationProvider implements vscode.TreeDataProvider<Application> {
 
@@ -16,6 +17,7 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
 
   applications: object;
   componentProvider: ComponentProvider;
+  componentInstanceProvider: ComponentInstanceProvider;
   pageProvider: PageProvider;
   context: vscode.ExtensionContext;
   selectedApplication: Application | undefined;
@@ -25,6 +27,8 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
     this.context = context;
     this.componentProvider = new ComponentProvider(context);
     this.pageProvider = new PageProvider(context);
+    this.componentInstanceProvider = new ComponentInstanceProvider(context);
+
     this.selectApplication = this.selectApplication.bind(this);
 
     this.registerCommands();
@@ -81,7 +85,7 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
               metadata.type,
               vscode.TreeItemCollapsibleState.Collapsed
             )
-          )
+          );
         }
       });
     }
@@ -101,8 +105,8 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
 
     const componentMetadata = application.metadata.components;
 
-    const instances = this.getComponentInstancesForApplication(application);
-
+    const instances: ComponentInstance[] = this.getComponentInstancesForApplication(application);
+  
     const components: Component[] = [];
 
     Object.keys(componentMetadata).forEach((component) => {
@@ -127,6 +131,7 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
 
     this.pageProvider.setData(pages);
     this.componentProvider.setData(components);
+    this.componentInstanceProvider.setData(instances);
   }
 
   private registerCommands() {
