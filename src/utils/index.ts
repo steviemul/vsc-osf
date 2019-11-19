@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as vscode from 'vscode';
 
 const readJson = (location: string) => {
   if (fs.existsSync(location)) {
@@ -8,6 +9,22 @@ const readJson = (location: string) => {
   }
 };
 
+const compareIgnoreCase = (itemA: vscode.TreeItem, itemB: vscode.TreeItem) => {
+  const labelA = itemA.label.toLowerCase();
+  const labelB =  itemB.label.toLowerCase();
+
+  if (labelA < labelB) {
+    return -1;
+  }
+  
+  if (labelB > labelA) {
+    return 1;
+  }
+
+  return 0;
+};
+
 export {
-  readJson
+  readJson,
+  compareIgnoreCase
 };

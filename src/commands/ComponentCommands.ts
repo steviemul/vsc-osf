@@ -70,10 +70,12 @@ async function createComponentInstance() {
 
             const typeDefinition = appJson.components[type];
 
+            const components: any[] = [];
+
             if (typeDefinition.type === 'container') {
               const layoutMeta = {regions: [{
                 width:12,
-                components: []
+                components: components
               }]};
 
               const layoutMetaLocation = path.join(instanceLocation, 'layout.json');

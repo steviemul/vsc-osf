@@ -10,7 +10,9 @@ interface IconDefinition {
 const ICONS: IconDefinition = {
   'config': 'cog48x48.png',
   'resources': 'font32x32.png',
-  'layout': 'th.png'
+  'layout': 'th.png',
+  'content': 'globe32x32.png',
+  'contentItem': 'file-code-o32x32.png'
 };
 
 export default class InstanceData extends vscode.TreeItem {
@@ -27,13 +29,20 @@ export default class InstanceData extends vscode.TreeItem {
 
     this.type = type;
     this.root = root;
+    
+    if (this.type === 'content') {
+      this.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+    }
+    else {
+      const filename = (this.type === 'contentItem') ? label : type + '.json';
+
+      this.command = {
+        command: 'occ.osf.showInstanceData',
+        arguments: [path.join(root, filename)],
+        title: 'Open data'
+      };
+    }
 
     this.iconPath = path.join(__filename, '..', '..', '..', 'images', ICONS[type].toString());
-
-    this.command = {
-      command: 'occ.osf.showInstanceData',
-      arguments: [path.join(root, type + '.json')],
-      title: 'Open data'
-    };
   }
 }
