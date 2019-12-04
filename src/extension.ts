@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as glob from 'glob';
 import ComponentCompletion from './language/ComponentCompletion';
 import ComponentCommands from './commands/ComponentCommands';
+import GeneratorCommands from './commands/GeneratorCommands';
 import PageCommands from './commands/PageCommands';
 import {ApplicationProvider} from './providers/ApplicationProvider';
 import {setApplicationInformationFromFiles, APPS} from './data/applications';
@@ -20,6 +21,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	pageCommands.register();
 	
+	const generatorCommands = new GeneratorCommands(context, applicationProvider);
+
+	generatorCommands.register();
+
 	const componentCompletion = new ComponentCompletion();
 	
 	const workspaceRoot = vscode.workspace.rootPath;

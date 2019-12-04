@@ -14,7 +14,7 @@
     "title": {
       "$id": "#/properties/title",
       "type": "string",
-      "title": "The Title Schema",
+      "title": "The Title Schema",  
       "default": "",
       "examples": [
         "Homepage"
@@ -45,6 +45,12 @@
       "$id": "#/properties/secure",
       "type": "boolean",
       "title": "The Secure Schema",
+      "default": false
+    },
+    "secured": {
+      "$id": "#/properties/secured",
+      "type": "boolean",
+      "title": "The Secured Schema",
       "default": false
     },
     "defaultPage": {
@@ -78,8 +84,7 @@
         "title": "The Items Schema",
         "required": [
           "type",
-          "width",
-          "components"
+          "width"
         ],
         "properties": {
           "type": {
@@ -92,6 +97,18 @@
               "header"
             ],
             "pattern": "^(.*)$"
+          },
+          "structure": {
+            "$id": "#/properties/regions/items/properties/structure",
+            "type": "string",
+            "enum": [
+              "stack",
+              "slot"
+            ],
+            "title": "The Structure Schema"
+          },
+          "regions": {
+            "$ref": "#/properties/layout"
           },
           "width": {
             "$id": "#/properties/layout/items/properties/width",

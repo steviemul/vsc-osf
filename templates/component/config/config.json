@@ -1,0 +1,16 @@
+{
+  "widgetDescriptorName": "SampleComponent",
+  "properties": [
+    {
+      "id": "sampleConfigOption",
+      "type": "stringType",
+      "name": "sampleConfigOption",
+      "helpTextResourceId": "sampleConfigOptionHelpText",
+      "labelResourceId": "sampleConfigOptionLabel",
+      "defaultValue": "",
+      "required": false,
+      "maxLength": 50,
+      "minLength": 3
+    }
+  ]
+}

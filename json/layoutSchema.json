@@ -17,8 +17,7 @@
         "type": "object",
         "title": "The Items Schema",
         "required": [
-          "width",
-          "components"
+          "width"
         ],
         "properties": {
           "width": {
@@ -31,6 +30,12 @@
             "examples": [
               12
             ]
+          },
+          "structure": {
+            "$id": "#/properties/regions/items/properties/structure",  
+            "type":"string",
+            "enum": ["stack", "slot"],
+            "title": "The Structure Schema"
           },
           "components": {
             "$id": "#/properties/regions/items/properties/components",
