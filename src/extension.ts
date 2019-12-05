@@ -3,6 +3,7 @@ import * as glob from 'glob';
 import ComponentCompletion from './language/ComponentCompletion';
 import ComponentCommands from './commands/ComponentCommands';
 import GeneratorCommands from './commands/GeneratorCommands';
+import CliCommands from './commands/CliCommands';
 import PageCommands from './commands/PageCommands';
 import {ApplicationProvider} from './providers/ApplicationProvider';
 import {setApplicationInformationFromFiles, APPS} from './data/applications';
@@ -25,6 +26,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	generatorCommands.register();
 
+	const cliCommands = new CliCommands(context);
+
+	cliCommands.register();
+	
 	const componentCompletion = new ComponentCompletion();
 	
 	const workspaceRoot = vscode.workspace.rootPath;

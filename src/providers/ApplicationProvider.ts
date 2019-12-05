@@ -34,29 +34,42 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
     this.registerCommands();
   }
 
+  private processPageFiles(location: string, pages: Page[]) {
+    const pageFiles = fs.readdirSync(location);
+
+    console.log("Processing " + location);
+
+    pageFiles.forEach((pageFile) => {
+      const pageLocation = path.join(location, pageFile);
+
+      const stat = fs.statSync(pageLocation);
+
+      if (stat.isFile()) {
+        const pageJson = readJson(pageLocation);
+
+        pages.push(
+          new Page(
+            'page',
+            pageJson.title,
+            pageLocation,
+            pageJson,
+            vscode.TreeItemCollapsibleState.None
+          )
+        );
+      }
+      else if (stat.isDirectory()) {
+        this.processPageFiles(pageLocation, pages);
+      }
+    });
+  }
+
   private getPagesForApplication(application: Application) {
 
     const location = path.join(application.root, 'assets', 'pages');
     const pages: Page[] = [];
 
     if (fs.existsSync(location)) {
-      const pageFiles = fs.readdirSync(location);
-
-      pageFiles.forEach((pageFile) => {
-        const pageLocation = path.join(location, pageFile);
-
-        const pageJson = readJson(pageLocation);
-
-        pages.push(
-          new Page(
-            'page', 
-            pageJson.title, 
-            pageLocation,
-            pageJson,
-            vscode.TreeItemCollapsibleState.None
-          )
-        );
-      });
+      this.processPageFiles(location, pages);  
     }
 
     return pages;

@@ -59,6 +59,7 @@ export default class ComponentCompletion {
   activate() {
     const selectors = [
       { language: 'json', pattern: '**/pages/*.json' },
+      { language: 'json', pattern: '**/pages/**/*.json' },
       { language: 'json', pattern: '**/assets/components/*/layout.json' },
       { language: 'json', pattern: '**/assets/components/*/index.json' }
     ];

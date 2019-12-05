@@ -72,6 +72,22 @@
 					"light": "images/search48x48.png",
 					"dark": "images/search48x48.png"
 				}
+			},
+			{
+				"command": "occ.osf.deployApp",
+				"title": "Deploy Application",
+				"icon": {
+					"light": "images/arrow-circle-o-up.png",
+					"dark":  "images/arrow-circle-o-up.png"
+				}
+			},
+			{
+				"command": "occ.osf.downloadApp",
+				"title": "Download Application",
+				"icon": {
+					"light": "images/arrow-circle-o-down.png",
+					"dark": "images/arrow-circle-o-down.png"
+				}
 			}
 		],
 		"jsonValidation": [
@@ -137,6 +153,16 @@
 				{
 					"command": "occ.osf.renameInstance",
 					"when": "viewItem == instance",
+					"group": "inline"
+				},
+				{
+					"command":"occ.osf.deployApp",
+					"when": "view == occ.osf.apps",
+					"group": "inline"
+				},
+				{
+					"command":"occ.osf.downloadApp",
+					"when": "view == occ.osf.apps",
 					"group": "inline"
 				}
 			]
