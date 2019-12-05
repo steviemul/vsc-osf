@@ -135,6 +135,89 @@
           }
         }
       }
+    },
+    "settings": {
+      "$id": "#/properties/settings",
+      "type": "object",
+      "title": "The settings Schema",
+      "properties": {
+        "accountShopper": {
+          "$id": "#/properties/settings/properties/accountShopper",
+          "type":"boolean"
+        },
+        "orderStates": {
+          "$id": "#/properties/settings/properties/orderStates",
+          "type": "array",
+          "items": {
+            "$id": "#/properties/settings/properties/orderStates/items",
+            "type": "string",
+            "enum": [
+              "SUSPENDED",
+              "REJECTED_QUOTE",
+              "PENDING_QUOTE",
+              "AGENT_REJECTED",
+              "PENDING_AGENT_APPROVAL",
+              "QUEUED",
+              "PENDING_PAYMENT_TEMPLATE",
+              "TEMPLATE",
+              "FAILED_APPROVAL_TEMPLATE",
+              "PENDING_CUSTOMER_RETURN",
+              "NDING_PAYMENT",
+              "APPROVED_TEMPLATE",
+              "ING_AMENDED",
+              "PENDING_APPROVAL_TEMPLATE",
+              "REJECTED",
+              "QUOTE_REQUEST_FAILED",
+              "FAILED_APPROVAL",
+              "APPROVED",
+              "PENDING_APPROVAL",
+              "QUOTED",
+              "PENDING_CUSTOMER_ACTION",
+              "PENDING_MERCHANT_ACTION",
+              "FAILED",
+              "NO_PENDING_ACTION",
+              "REMOVED",
+              "PENDING_REMOVE",
+              "INCOMPLETE_CANCEL",
+              "PROCESSING",
+              "SUBMITTED",
+              "INCOMPLETE"
+            ]
+          }
+        },
+        "products": {
+          "$id": "#/properties/settings/properties/products",
+          "type": "array",
+          "items": {
+            "$id": "#/properties/settings/properties/products/items",
+            "type": "string"
+          }
+        },
+        "productTypes": {
+          "$id": "#/properties/settings/properties/productTypes",
+          "type": "array",
+          "items": {
+            "$id": "#/properties/settings/properties/productTypes/items",
+            "type": "string"
+          }
+        },
+        "collections": {
+          "$id": "#/properties/settings/properties/collections",
+          "type": "array",
+          "items": {
+            "$id": "#/properties/settings/properties/collections/items",
+            "type": "string"
+          }
+        },
+        "metaTags": {
+          "$id": "#/properties/settings/properties/metaTags",
+          "type": "array",
+          "items": {
+            "$id": "#/properties/settings/properties/metaTags/items",
+            "type": "object"
+          }  
+        }
+      }
     }
   }
 }
