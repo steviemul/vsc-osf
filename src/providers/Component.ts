@@ -18,7 +18,11 @@ export default class Component extends vscode.TreeItem {
 
     this.metadata = metadata;
     this.command = command;
-    this.iconPath = path.join(__filename, '..', '..', '..', 'images/cube.png');
+
+    this.iconPath = {
+      light: path.join(__filename, '..', '..', '..', 'images/dark/cube.png'),
+      dark: path.join(__filename, '..', '..', '..', 'images/light/cube.png')
+    };
 
     this.instances = instances;
   }

@@ -20,7 +20,11 @@ export default class ComponentInstance extends vscode.TreeItem {
     this.root = root;
     this.componentType = componentType;
     this.contextValue = 'instance';
-    this.iconPath = path.join(__filename, '..', '..', '..', 'images/code-fork32x32.png');
+
+    this.iconPath = {
+      light: path.join(__filename, '..', '..', '..', 'images/dark/code-fork.png'),
+      dark: path.join(__filename, '..', '..', '..', 'images/light/code-fork.png')
+    };
   }
 
 }

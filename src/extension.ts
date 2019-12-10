@@ -10,7 +10,7 @@ import {setApplicationInformationFromFiles, APPS} from './data/applications';
 
 const APP_JSON_PATTERN = '**/app.json';
 
-export function activate(context: vscode.ExtensionContext) {
+const startExtension = (context: vscode.ExtensionContext): ApplicationProvider => {
 
 	const applicationProvider = new ApplicationProvider(context);
 
@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const pageCommands = new PageCommands(context, applicationProvider);
 
 	pageCommands.register();
-	
+
 	const generatorCommands = new GeneratorCommands(context, applicationProvider);
 
 	generatorCommands.register();
@@ -29,9 +29,16 @@ export function activate(context: vscode.ExtensionContext) {
 	const cliCommands = new CliCommands(context);
 
 	cliCommands.register();
-	
+
 	const componentCompletion = new ComponentCompletion();
-	
+
+	componentCompletion.activate();
+
+	return applicationProvider;
+};
+
+export function activate(context: vscode.ExtensionContext) {
+
 	const workspaceRoot = vscode.workspace.rootPath;
 
 	glob(APP_JSON_PATTERN, {
@@ -41,8 +48,9 @@ export function activate(context: vscode.ExtensionContext) {
 	}, (err, files) => {
 		if (files && files.length > 0) {
 			setApplicationInformationFromFiles(workspaceRoot, files);
-			componentCompletion.activate();
 
+			const applicationProvider = startExtension(context);
+			
 			applicationProvider.setData(APPS);
 			
 			vscode.window.registerTreeDataProvider('occ.osf.apps', applicationProvider);

@@ -23,7 +23,10 @@ export default class Application extends vscode.TreeItem {
       title: 'Select Application'
     };
 
-    this.iconPath = path.join(__filename, '..', '..', '..', 'images/cubes.png');
+    this.iconPath = {
+      light: path.join(__filename, '..', '..', '..', 'images/dark/cubes.png'),
+      dark: path.join(__filename, '..', '..', '..', 'images/light/cubes.png'),
+    };
   }
 
 }

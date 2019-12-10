@@ -23,7 +23,11 @@ export default class Page extends vscode.TreeItem {
     };
 
     this.contextValue = 'page';
-    this.iconPath = path.join(__filename, '..', '..', '..', 'images/th.png');
+    this.iconPath = {
+      light: path.join(__filename, '..', '..', '..', 'images/dark/th.png'),
+      dark: path.join(__filename, '..', '..', '..', 'images/light/th.png')
+    };
+    
   }
 
 }

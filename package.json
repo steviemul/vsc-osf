@@ -45,48 +45,56 @@
 				"command": "occ.osf.deletePage",
 				"title": "Delete Page",
 				"icon": {
-					"light": "images/trash48x48.png",
-					"dark": "images/trash48x48.png"
+					"light": "images/dark/trash.png",
+					"dark": "images/light/trash.png"
 				}
 			},
 			{
 				"command": "occ.osf.deleteInstance",
 				"title": "Delete Instance",
 				"icon": {
-					"light": "images/trash48x48.png",
-					"dark": "images/trash48x48.png"
+					"light": "images/dark/trash.png",
+					"dark": "images/light/trash.png"
 				}
 			},
 			{
 				"command": "occ.osf.renameInstance",
 				"title": "Rename Instance",
 				"icon": {
-					"light": "images/pencil32x32.png",
-					"dark": "images/pencil32x32.png"
+					"light": "images/dark/pencil.png",
+					"dark": "images/light/pencil.png"
 				}
 			},
 			{
 				"command": "occ.osf.previewLayout",
 				"title": "Open Page",
 				"icon": {
-					"light": "images/search48x48.png",
-					"dark": "images/search48x48.png"
+					"light": "images/dark/search.png",
+					"dark": "images/light/search.png"
 				}
 			},
 			{
 				"command": "occ.osf.deployApp",
 				"title": "Deploy Application",
 				"icon": {
-					"light": "images/arrow-circle-o-up.png",
-					"dark":  "images/arrow-circle-o-up.png"
+					"light": "images/dark/arrow-circle-o-up.png",
+					"dark":  "images/light/arrow-circle-o-up.png"
 				}
 			},
 			{
 				"command": "occ.osf.downloadApp",
 				"title": "Download Application",
 				"icon": {
-					"light": "images/arrow-circle-o-down.png",
-					"dark": "images/arrow-circle-o-down.png"
+					"light": "images/dark/arrow-circle-o-down.png",
+					"dark": "images/light/arrow-circle-o-down.png"
+				}
+			},
+			{
+				"command": "occ.osf.buildApp",
+				"title": "Build Application",
+				"icon": {
+					"light": "images/dark/gears.png",
+					"dark": "images/light/gears.png"
 				}
 			}
 		],
@@ -109,7 +117,7 @@
 				{
 					"id": "occ-osf-app-explorer",
 					"title": "Oracle Commerce Cloud",
-					"icon": "images/design48x48.png"
+					"icon": "images/design.png"
 				}
 			]
 		},
@@ -162,6 +170,11 @@
 				},
 				{
 					"command":"occ.osf.downloadApp",
+					"when": "view == occ.osf.apps",
+					"group": "inline"
+				},
+				{
+					"command":"occ.osf.buildApp",
 					"when": "view == occ.osf.apps",
 					"group": "inline"
 				}
