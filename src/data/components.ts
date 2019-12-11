@@ -38,6 +38,8 @@ const getComponentsForContainingApp = (fileLocation: string, includeInstances: b
   const appRoot = getAppRoot(fileLocation);
 
   if (appRoot) {
+    console.log(appRoot);
+
     const appJsonLocation = path.join(appRoot, OCC, APP_JSON);
 
     if (fs.existsSync(appJsonLocation)) {

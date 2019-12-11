@@ -1,7 +1,9 @@
 import * as vscode from 'vscode';
 import Component from './Component';
 import InstanceData from './InstanceData';
+import { compareIgnoreCase } from '../utils';
 import * as fs from 'fs';
+import * as path from 'path';
 
 export class ComponentProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
@@ -27,7 +29,7 @@ export class ComponentProvider implements vscode.TreeDataProvider<vscode.TreeIte
   public async getChildren(item?: Component): Promise<vscode.TreeItem[]> {
 
     if (item === undefined) {
-      return this.components;
+      return this.components.sort(compareIgnoreCase);
     }
 
     if (item.instances) {
@@ -53,6 +55,11 @@ export class ComponentProvider implements vscode.TreeDataProvider<vscode.TreeIte
     if (item.container) {
       instanceData.push(new InstanceData('layout', 'layout', item.root));
     }
+
+    if (fs.existsSync(path.join(item.root, 'content'))) {
+      instanceData.push(new InstanceData('content', 'content', item.root));
+    }
+
     return instanceData;
   }
 

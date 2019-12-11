@@ -160,8 +160,31 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
     }
   }
 
+  private addPreconfiguredContainers (appRoot: string, appJson: any) {
+
+    const containerLocation = path.join(appRoot, 'assets', 'containers');
+
+    if (fs.existsSync(containerLocation)) {
+      const containers = fs.readdirSync(containerLocation);
+
+      containers.forEach(child => {
+        const location = path.join(containerLocation, child);
+
+        const container = readJson(location);
+
+        appJson.components[container.title] = {
+          type: 'container'
+        }
+      });
+    }
+  }
+
   public setData(applications: object) {
     this.applications = applications;
+
+    Object.values(this.applications).forEach((application: any) => {
+      this.addPreconfiguredContainers(application.root, application.metadata);
+    });
 
     this._onDidChangeTreeData.fire();
   }
