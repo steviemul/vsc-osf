@@ -61,6 +61,7 @@ export default class ComponentCompletion {
       { language: 'json', pattern: '**/pages/*.json' },
       { language: 'json', pattern: '**/pages/**/*.json' },
       { language: 'json', pattern: '**/assets/components/*/layout.json' },
+      { language: 'json', pattern: '**/assets/components/*/structure.json' },
       { language: 'json', pattern: '**/assets/components/*/index.json' }
     ];
 
