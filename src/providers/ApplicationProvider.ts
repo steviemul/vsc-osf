@@ -90,6 +90,10 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
         if (fs.existsSync(componentLocation)) {
           const metadata = readJson(componentLocation);
 
+          if (!metadata.type || metadata.type === '') {
+            console.error(`No type specified in ${componentLocation}`);
+          }
+          
           instances.push(
             new ComponentInstance(
               'instance',

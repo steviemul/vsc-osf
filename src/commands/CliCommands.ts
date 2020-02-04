@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import Application from '../providers/Application';
+import { timingSafeEqual } from 'crypto';
 
 export default class CliCommands {
 
@@ -34,7 +35,14 @@ export default class CliCommands {
       this.occTerminal.sendText(`yarn build ${name} && yarn output`);
     });
 
+    const downloadSubscription = vscode.commands.registerCommand('occ.osf.downloadApp', (application: Application) => {
+      const name = application ? application.metadata.name : '';
+      this.occTerminal.show();
+      this.occTerminal.sendText(`yarn download-assets ${name}`)
+    });
+
     this.context.subscriptions.push(deploySubscription);
     this.context.subscriptions.push(buildSubscription);
+    this.context.subscriptions.push(downloadSubscription);
   }
 }

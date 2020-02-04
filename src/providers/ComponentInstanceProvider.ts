@@ -29,9 +29,13 @@ export class ComponentInstanceProvider implements vscode.TreeDataProvider<vscode
       instanceData.push(new InstanceData('layout', 'layout', item.root));
     }
 
-    if (fs.existsSync(path.join(item.root, 'content'))) {
-      instanceData.push(new InstanceData('content', 'content', item.root));
-    }
+    const children = fs.readdirSync(item.root);
+
+    children.forEach(child => {
+      if (fs.lstatSync(path.join(item.root, child)).isDirectory()) {
+        instanceData.push(new InstanceData('content', child, item.root));  
+      }
+    });
 
     return instanceData;
   }
@@ -40,13 +44,17 @@ export class ComponentInstanceProvider implements vscode.TreeDataProvider<vscode
 
     const instanceData: InstanceData[] = [];
 
-    if (fs.existsSync(path.join(item.root, 'content'))) {
-      const files = fs.readdirSync(path.join(item.root, 'content'));
+    const children = fs.readdirSync(item.root);
+    
+    children.forEach(child => {
+      if (fs.lstatSync(path.join(item.root, child)).isDirectory()) {
+        const files = fs.readdirSync(path.join(item.root, child));
 
-      files.forEach(file => {
-        instanceData.push(new InstanceData('contentItem', file, path.join(item.root, 'content')));
-      });
-    }
+        files.forEach(file => {
+          instanceData.push(new InstanceData('contentItem', file, path.join(item.root, child)));
+        });
+      }
+    });
 
     return instanceData;
   }

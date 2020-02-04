@@ -4,6 +4,7 @@ import ComponentCompletion from './language/ComponentCompletion';
 import ComponentCommands from './commands/ComponentCommands';
 import GeneratorCommands from './commands/GeneratorCommands';
 import CliCommands from './commands/CliCommands';
+import Validator from './validator/Validator'
 import PageCommands from './commands/PageCommands';
 import {ApplicationProvider} from './providers/ApplicationProvider';
 import {setApplicationInformationFromFiles, APPS} from './data/applications';
@@ -34,6 +35,10 @@ const startExtension = (context: vscode.ExtensionContext): ApplicationProvider =
 
 	componentCompletion.activate();
 
+	const validator = new Validator(context, applicationProvider);
+
+	validator.register();
+	
 	return applicationProvider;
 };
 
