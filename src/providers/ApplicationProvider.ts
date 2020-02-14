@@ -9,6 +9,11 @@ import Page from './Page';
 import { readJson } from '../utils';
 import ComponentInstance from './ComponentInstance';
 import { ComponentInstanceProvider } from './ComponentInstanceProvider';
+import AssetsSourceProvider from '../scm/AssetsSourceProvider';
+
+function createResourceUri(filePath: string): vscode.Uri {
+  return vscode.Uri.file(filePath);
+}
 
 export class ApplicationProvider implements vscode.TreeDataProvider<Application> {
 
@@ -21,6 +26,7 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
   pageProvider: PageProvider;
   context: vscode.ExtensionContext;
   selectedApplication: Application | undefined;
+  sourceControl: AssetsSourceProvider | undefined;
 
   constructor(context: vscode.ExtensionContext) {
     this.applications = new Array();
@@ -34,10 +40,43 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
     this.registerCommands();
   }
 
+  private registerIndex(root: string, files: any[]) {
+
+    if (this.sourceControl) {
+      const index = this.sourceControl.sourceControl.createResourceGroup('index', 'Index');
+
+      index.resourceStates = files.map(file => {
+        return {
+          resourceUri: createResourceUri(path.join(root, file))
+        };
+      });
+    }
+  }
+
+  private registerRemote(root: string, files: any[]) {
+
+    if (this.sourceControl) {
+      const index = this.sourceControl.sourceControl.createResourceGroup('remote', 'Remote');
+
+      index.resourceStates = files.map(file => {
+        return {
+          resourceUri: createResourceUri(path.join(root, file))
+        };
+      });
+    
+      index.resourceStates.push({
+        resourceUri: createResourceUri(path.join(root, 'new-random-file.json'))
+      });
+    }
+  }
+
   private processPageFiles(location: string, pages: Page[]) {
     const pageFiles = fs.readdirSync(location);
 
     console.log("Processing " + location);
+
+    this.registerIndex(location, pageFiles);
+    this.registerRemote(location, pageFiles);
 
     pageFiles.forEach((pageFile) => {
       const pageLocation = path.join(location, pageFile);

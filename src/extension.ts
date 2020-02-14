@@ -8,12 +8,23 @@ import Validator from './validator/Validator'
 import PageCommands from './commands/PageCommands';
 import {ApplicationProvider} from './providers/ApplicationProvider';
 import {setApplicationInformationFromFiles, APPS} from './data/applications';
+import AssetsSourceProvider from './scm/AssetsSourceProvider';
 
 const APP_JSON_PATTERN = '**/app.json';
 
 const startExtension = (context: vscode.ExtensionContext): ApplicationProvider => {
 
 	const applicationProvider = new ApplicationProvider(context);
+
+	const onlineEnabled: boolean = vscode.workspace.getConfiguration('occ').get('online.enabled');
+
+	if (onlineEnabled === true) {
+		const sourceControl = new AssetsSourceProvider();
+
+		sourceControl.register();
+
+		applicationProvider.sourceControl = sourceControl;
+	}
 
 	const componentCommands = new ComponentCommands(context, applicationProvider);
 

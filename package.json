@@ -182,22 +182,21 @@
 		},
 		"configuration": {
 			"title": "OCC Settings",
-			"type": "object",
 			"properties": {
-				"occ.server.http.port": {
+				"occ.online.enabled": {
+					"type":"boolean",
+					"default": false,
+					"description": "Whether online features such as server sync and scm are enabled"
+				},
+				"occ.http.port": {
 					"type":"integer",
 					"default":10080,
 					"description": "The HTTP Port of the node server"
 				},
-				"occ.server.https.port": {
+				"occ.https.port": {
 					"type": "integer",
 					"default": 10443,
 					"description": "The HTTPS Port of the node server"
-				},
-				"occ.server.preview": {
-					"type":"boolean",
-					"default": true,
-					"description": "Whether to start the node server in preview mode or not"
 				}
 			}
 		}
