@@ -30,6 +30,10 @@
 				"title": "Show application assets"
 			},
 			{
+				"command": "occ.osf.selectEnvironment",
+				"title": "Select Environment"
+			},
+			{
 				"command": "occ.osf.openPage",
 				"title": "Open page definition"
 			},
@@ -78,7 +82,7 @@
 				"title": "Deploy Application",
 				"icon": {
 					"light": "images/dark/arrow-circle-o-up.png",
-					"dark":  "images/light/arrow-circle-o-up.png"
+					"dark": "images/light/arrow-circle-o-up.png"
 				}
 			},
 			{
@@ -124,6 +128,10 @@
 		"views": {
 			"occ-osf-app-explorer": [
 				{
+					"id": "occ.osf.environments",
+					"name": "Environments"
+				},
+				{
 					"id": "occ.osf.apps",
 					"name": "Applications"
 				},
@@ -164,17 +172,17 @@
 					"group": "inline"
 				},
 				{
-					"command":"occ.osf.deployApp",
+					"command": "occ.osf.deployApp",
 					"when": "view == occ.osf.apps",
 					"group": "inline"
 				},
 				{
-					"command":"occ.osf.downloadApp",
+					"command": "occ.osf.downloadApp",
 					"when": "view == occ.osf.apps",
 					"group": "inline"
 				},
 				{
-					"command":"occ.osf.buildApp",
+					"command": "occ.osf.buildApp",
 					"when": "view == occ.osf.apps",
 					"group": "inline"
 				}
@@ -184,13 +192,13 @@
 			"title": "OCC Settings",
 			"properties": {
 				"occ.online.enabled": {
-					"type":"boolean",
+					"type": "boolean",
 					"default": false,
 					"description": "Whether online features such as server sync and scm are enabled"
 				},
 				"occ.http.port": {
-					"type":"integer",
-					"default":10080,
+					"type": "integer",
+					"default": 10080,
 					"description": "The HTTP Port of the node server"
 				},
 				"occ.https.port": {
@@ -218,11 +226,15 @@
 	"dependencies": {
 		"@babel/parser": "^7.4.5",
 		"@babel/types": "^7.4.4",
+		"@types/adm-zip": "^0.4.32",
 		"@types/fs-extra": "^8.0.0",
 		"@types/glob": "^7.1.1",
+		"@types/node-fetch": "^2.5.4",
+		"adm-zip": "^0.4.14",
 		"babel-core": "^6.26.3",
 		"change-case": "^4.0.1",
 		"fs-extra": "^8.1.0",
-		"glob": "^7.1.4"
+		"glob": "^7.1.4",
+		"node-fetch": "^2.6.0"
 	}
 }

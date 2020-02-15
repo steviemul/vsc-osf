@@ -26,7 +26,7 @@ export default class CliCommands {
       const name = application ? application.metadata.name : '';
       
       this.occTerminal.show();
-      this.occTerminal.sendText(`yarn delete ${name} && yarn deploy --noBuild ${name}`);
+      this.occTerminal.sendText(`yarn deploy --reset --noBuild ${name}`);
     });
 
     const buildSubscription = vscode.commands.registerCommand('occ.osf.buildApp', (application: Application) => {
@@ -38,7 +38,7 @@ export default class CliCommands {
     const downloadSubscription = vscode.commands.registerCommand('occ.osf.downloadApp', (application: Application) => {
       const name = application ? application.metadata.name : '';
       this.occTerminal.show();
-      this.occTerminal.sendText(`yarn download-assets ${name}`)
+      this.occTerminal.sendText(`yarn download-assets ${name}`);
     });
 
     this.context.subscriptions.push(deploySubscription);

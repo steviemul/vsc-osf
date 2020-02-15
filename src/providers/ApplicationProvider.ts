@@ -9,6 +9,7 @@ import Page from './Page';
 import { readJson } from '../utils';
 import ComponentInstance from './ComponentInstance';
 import { ComponentInstanceProvider } from './ComponentInstanceProvider';
+import {EnvironmentProvider} from './EnvironmentProvider';
 import AssetsSourceProvider from '../scm/AssetsSourceProvider';
 
 function createResourceUri(filePath: string): vscode.Uri {
@@ -24,6 +25,7 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
   componentProvider: ComponentProvider;
   componentInstanceProvider: ComponentInstanceProvider;
   pageProvider: PageProvider;
+  environmentProvider: EnvironmentProvider;
   context: vscode.ExtensionContext;
   selectedApplication: Application | undefined;
   sourceControl: AssetsSourceProvider | undefined;
@@ -34,6 +36,7 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
     this.componentProvider = new ComponentProvider(context);
     this.pageProvider = new PageProvider(context);
     this.componentInstanceProvider = new ComponentInstanceProvider(context);
+    this.environmentProvider = new EnvironmentProvider(context);
 
     this.selectApplication = this.selectApplication.bind(this);
 
@@ -188,6 +191,8 @@ export class ApplicationProvider implements vscode.TreeDataProvider<Application>
     this.pageProvider.setData(pages);
     this.componentProvider.setData(components);
     this.componentInstanceProvider.setData(instances);
+
+    this.environmentProvider.update();
   }
 
   private registerCommands() {
