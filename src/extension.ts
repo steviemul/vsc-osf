@@ -3,12 +3,12 @@ import * as glob from 'glob';
 import ComponentCompletion from './language/ComponentCompletion';
 import ComponentCommands from './commands/ComponentCommands';
 import GeneratorCommands from './commands/GeneratorCommands';
-import EnvironmentCommands from './commands/EnvironmentCommands';
 import CliCommands from './commands/CliCommands';
 import Validator from './validator/Validator'
 import PageCommands from './commands/PageCommands';
 import {ApplicationProvider} from './providers/ApplicationProvider';
 import {setApplicationInformationFromFiles, APPS} from './data/applications';
+import AssetsSourceProvider from './scm/AssetsSourceProvider';
 
 const APP_JSON_PATTERN = '**/app.json';
 
@@ -39,10 +39,6 @@ const startExtension = (context: vscode.ExtensionContext): ApplicationProvider =
 	const validator = new Validator(context, applicationProvider);
 
 	validator.register();
-	
-	const environmentCommands = new EnvironmentCommands(context, applicationProvider);
-
-	environmentCommands.register();
 
 	return applicationProvider;
 };
@@ -62,6 +58,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const applicationProvider = startExtension(context);
 			
 			applicationProvider.setData(APPS);
+			
+			const scmProvider = new AssetsSourceProvider(context, applicationProvider);
 			
 			vscode.window.registerTreeDataProvider('occ.osf.apps', applicationProvider);
 			vscode.window.registerTreeDataProvider('occ.osf.pages', applicationProvider.pageProvider);

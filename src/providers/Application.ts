@@ -6,7 +6,8 @@ export default class Application extends vscode.TreeItem {
   type: string;
   root: string;
   metadata: any;
-
+  changedResources: vscode.SourceControlResourceGroup;
+  
   constructor(
     type: string, label: string,
     root: string, metadata: object, 

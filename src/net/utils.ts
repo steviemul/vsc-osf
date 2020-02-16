@@ -1,8 +1,6 @@
 import * as AdmZip from 'adm-zip';
 import Application from '../providers/Application';
-import * as fs from 'fs-extra';
 import * as path from 'path';
-import { getComponentsForContainingApp } from '../data';
 
 export async function unpack (data: Buffer) :Promise<any> {
 
@@ -21,21 +19,4 @@ export async function unpack (data: Buffer) :Promise<any> {
   });
 
   return contents;
-}
-
-const getComparableAppContents = (application: Application) => {
-
-  const assetsDir = path.join(application.root, 'assets');
-
-  const contents: any = {};
-
-
-  return contents;
-};
-
-export function getChangeList (application: Application, remoteContents: any): any {
-
-  const localContents = getComparableAppContents(application);
-
-  
 }

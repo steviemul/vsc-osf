@@ -46,6 +46,22 @@
 				"title": "Create new component type"
 			},
 			{
+				"command": "occ.osf.syncApp",
+				"title": "Sync application from remote",
+				"icon": {
+					"light": "images/dark/refresh.png",
+					"dark": "images/light/refresh.png"
+				}
+			},
+			{
+				"command": "occ.osf.syncAppUp",
+				"title": "Upload application"
+			},
+			{
+				"command": "occ.osf.syncAppDown",
+				"title": "Download application assets"
+			},
+			{
 				"command": "occ.osf.deletePage",
 				"title": "Delete Page",
 				"icon": {

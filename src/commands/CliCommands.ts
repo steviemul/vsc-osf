@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import Application from '../providers/Application';
-import { timingSafeEqual } from 'crypto';
 
 export default class CliCommands {
 

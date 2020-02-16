@@ -12,12 +12,6 @@ export default class Environment extends vscode.TreeItem {
     super(label, collapsibleState);
     this.metadata = metadata;
 
-    this.command = {
-      command: 'occ.osf.selectEnvironment',
-      arguments: [this],
-      title: 'Select Environment'
-    };
-
     this.iconPath = {
       light: path.join(__filename, '..', '..', '..', 'images/dark/server.png'),
       dark: path.join(__filename, '..', '..', '..', 'images/light/server.png'),
