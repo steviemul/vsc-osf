@@ -64,7 +64,7 @@ export default class AssetsSourceProvider {
     sc.statusBarCommands = [
       {
         "command": "occ.osf.selectEnvironment",
-        "title": "$(server) " + this.selectedEnv.metadata.appServerAdmin,
+        "title": "$(git-branch) " + this.selectedEnv.metadata.appServerAdmin,
         "tooltip": "Select another remote environment"
       },
       {
